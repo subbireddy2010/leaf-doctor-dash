@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Scan, TrendingUp, Activity, AlertTriangle } from "lucide-react";
+import { Scan, TrendingUp, Activity, AlertTriangle, Shield, Target, Brain } from "lucide-react";
 import Header from "@/components/Header";
 import StatsCard from "@/components/StatsCard";
 import ImageUpload from "@/components/ImageUpload";
@@ -9,6 +9,11 @@ import ScanHistoryChart from "@/components/Charts/ScanHistoryChart";
 import DiseaseDistributionChart from "@/components/Charts/DiseaseDistributionChart";
 import AccuracyTrendChart from "@/components/Charts/AccuracyTrendChart";
 import PlantHealthOverview from "@/components/Charts/PlantHealthOverview";
+import AlertSystem from "@/components/Dashboard/AlertSystem";
+import RealTimeMonitoring from "@/components/Dashboard/RealTimeMonitoring";
+import AccuracyMetrics from "@/components/Dashboard/AccuracyMetrics";
+import GeographicalAnalysis from "@/components/Dashboard/GeographicalAnalysis";
+import DetailedAnalysisTable from "@/components/Dashboard/DetailedAnalysisTable";
 import heroBanner from "@/assets/hero-banner.jpg";
 
 const Dashboard = () => {
@@ -47,62 +52,101 @@ const Dashboard = () => {
       </div>
 
       <div className="container mx-auto px-6 py-8">
-        {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        {/* Enhanced Stats Overview */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-8">
           <StatsCard
             icon={Scan}
             title="Total Scans"
-            value="1,234"
+            value="12,847"
             trend="+12% this month"
             trendColor="success"
           />
           <StatsCard
-            icon={TrendingUp}
-            title="Accuracy Rate"
-            value="94.2%"
+            icon={Brain}
+            title="AI Accuracy"
+            value="95.8%"
             trend="+2.1% this week"
             trendColor="success"
           />
           <StatsCard
             icon={Activity}
             title="Healthy Plants"
-            value="892"
+            value="11,892"
             trend="+5% this month"
             trendColor="success"
           />
           <StatsCard
             icon={AlertTriangle}
-            title="Diseases Detected"
-            value="342"
+            title="Active Issues"
+            value="35"
             trend="-8% this month"
+            trendColor="success"
+          />
+          <StatsCard
+            icon={Target}
+            title="Detection Rate"
+            value="97.1%"
+            trend="+1.5% this week"
+            trendColor="success"
+          />
+          <StatsCard
+            icon={Shield}
+            title="Prevented Loss"
+            value="$127K"
+            trend="+23% this month"
+            trendColor="success"
+          />
+          <StatsCard
+            icon={TrendingUp}
+            title="System Health"
+            value="99.9%"
+            trend="Stable"
             trendColor="success"
           />
         </div>
 
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Image Upload */}
+        {/* Alert System & Real-time Monitoring */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <div className="lg:col-span-2">
+            <RealTimeMonitoring />
+          </div>
+          <div>
+            <AlertSystem />
+          </div>
+        </div>
+
+        {/* Image Upload & Recent Scans */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           <div className="lg:col-span-2">
             <ImageUpload />
           </div>
-
-          {/* Recent Scans */}
           <div>
             <RecentScans />
           </div>
         </div>
 
-        {/* Charts Section */}
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Analysis Results */}
+        <div className="mb-8">
+          <DiseaseResult result={mockResult} />
+        </div>
+
+        {/* Advanced Analytics */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          <AccuracyMetrics />
+          <GeographicalAnalysis />
+        </div>
+
+        {/* Traditional Charts */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           <ScanHistoryChart />
-          <AccuracyTrendChart />
           <DiseaseDistributionChart />
+          <AccuracyTrendChart />
           <PlantHealthOverview />
         </div>
 
-        {/* Analysis Results */}
-        <div className="mt-8">
-          <DiseaseResult result={mockResult} />
+        {/* Detailed Analysis Table */}
+        <div className="mb-8">
+          <DetailedAnalysisTable />
         </div>
       </div>
     </div>
