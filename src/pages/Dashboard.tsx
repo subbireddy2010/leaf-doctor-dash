@@ -5,6 +5,10 @@ import StatsCard from "@/components/StatsCard";
 import ImageUpload from "@/components/ImageUpload";
 import DiseaseResult from "@/components/DiseaseResult";
 import RecentScans from "@/components/RecentScans";
+import ScanHistoryChart from "@/components/Charts/ScanHistoryChart";
+import DiseaseDistributionChart from "@/components/Charts/DiseaseDistributionChart";
+import AccuracyTrendChart from "@/components/Charts/AccuracyTrendChart";
+import PlantHealthOverview from "@/components/Charts/PlantHealthOverview";
 import heroBanner from "@/assets/hero-banner.jpg";
 
 const Dashboard = () => {
@@ -86,6 +90,14 @@ const Dashboard = () => {
           <div>
             <RecentScans />
           </div>
+        </div>
+
+        {/* Charts Section */}
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <ScanHistoryChart />
+          <AccuracyTrendChart />
+          <DiseaseDistributionChart />
+          <PlantHealthOverview />
         </div>
 
         {/* Analysis Results */}
