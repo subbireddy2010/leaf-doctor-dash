@@ -2,6 +2,7 @@ import { CheckCircle, AlertTriangle, Info } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import diseasedLeaf from "@/assets/diseased-leaf-spots.jpg";
 
 interface DiseaseResultProps {
   result?: {
@@ -49,16 +50,25 @@ const DiseaseResult = ({ result }: DiseaseResultProps) => {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h3 className="text-xl font-semibold text-foreground">{result.disease}</h3>
-            <p className="text-sm text-muted-foreground">
-              Confidence: {result.confidence}%
-            </p>
+        <div className="flex items-start gap-4">
+          <div className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+            <img 
+              src={diseasedLeaf} 
+              alt={result.disease}
+              className="w-full h-full object-cover"
+            />
           </div>
-          <Badge variant={severityColors[result.severity]} className="capitalize">
-            {result.severity} Risk
-          </Badge>
+          <div className="flex-1 flex items-center justify-between">
+            <div>
+              <h3 className="text-xl font-semibold text-foreground">{result.disease}</h3>
+              <p className="text-sm text-muted-foreground">
+                Confidence: {result.confidence}%
+              </p>
+            </div>
+            <Badge variant={severityColors[result.severity]} className="capitalize">
+              {result.severity} Risk
+            </Badge>
+          </div>
         </div>
 
         <div className="space-y-3">
