@@ -1,5 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 
 interface StatsCardProps {
   icon: LucideIcon;
@@ -7,17 +8,35 @@ interface StatsCardProps {
   value: string;
   trend?: string;
   trendColor?: "success" | "warning" | "destructive";
+  href?: string;
 }
 
-const StatsCard = ({ icon: Icon, title, value, trend, trendColor = "success" }: StatsCardProps) => {
+const StatsCard = ({ icon: Icon, title, value, trend, trendColor = "success", href }: StatsCardProps) => {
   const trendColors = {
     success: "text-success",
     warning: "text-warning", 
     destructive: "text-destructive"
   };
 
+  const CardWrapper = ({ children }: { children: React.ReactNode }) => {
+    if (href) {
+      return (
+        <Link to={href} className="block">
+          <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 cursor-pointer">
+            {children}
+          </Card>
+        </Link>
+      );
+    }
+    return (
+      <Card className="hover:shadow-md transition-shadow">
+        {children}
+      </Card>
+    );
+  };
+
   return (
-    <Card className="hover:shadow-md transition-shadow">
+    <CardWrapper>
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
           <div className="space-y-2">
@@ -34,7 +53,7 @@ const StatsCard = ({ icon: Icon, title, value, trend, trendColor = "success" }: 
           </div>
         </div>
       </CardContent>
-    </Card>
+    </CardWrapper>
   );
 };
 
