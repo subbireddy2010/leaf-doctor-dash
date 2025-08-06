@@ -4,6 +4,18 @@ import { Scan, TrendingUp, Activity, AlertTriangle, Shield, Target, Brain } from
 import Header from "@/components/Header";
 import StatsCard from "@/components/StatsCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import ImageUpload from "@/components/ImageUpload";
+import DiseaseResult from "@/components/DiseaseResult";
+import RecentScans from "@/components/RecentScans";
+import ScanHistoryChart from "@/components/Charts/ScanHistoryChart";
+import PlantHealthOverview from "@/components/Charts/PlantHealthOverview";
+import DiseaseDistributionChart from "@/components/Charts/DiseaseDistributionChart";
+import AccuracyTrendChart from "@/components/Charts/AccuracyTrendChart";
+import AlertSystem from "@/components/Dashboard/AlertSystem";
+import RealTimeMonitoring from "@/components/Dashboard/RealTimeMonitoring";
+import AccuracyMetrics from "@/components/Dashboard/AccuracyMetrics";
+import GeographicalAnalysis from "@/components/Dashboard/GeographicalAnalysis";
+import DetailedAnalysisTable from "@/components/Dashboard/DetailedAnalysisTable";
 
 const Dashboard = () => {
   const [analysisResult, setAnalysisResult] = useState<any>(null);
@@ -100,51 +112,36 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Simple placeholder cards for now */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Image Upload</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">Upload plant images for analysis</p>
-            </CardContent>
-          </Card>
+        {/* Main Dashboard Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <div className="lg:col-span-2 space-y-6">
+            <ImageUpload />
+            <ScanHistoryChart />
+            <PlantHealthOverview />
+          </div>
           
-          <Card>
-            <CardHeader>
-              <CardTitle>Recent Scans</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">View your recent plant scans</p>
-            </CardContent>
-          </Card>
+          <div className="space-y-6">
+            <RecentScans />
+            <AlertSystem />
+            <RealTimeMonitoring />
+          </div>
         </div>
 
         {/* Analysis Results */}
-        {mockResult && (
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle>Analysis Result</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-lg font-semibold">{mockResult.disease}</h3>
-                  <p className="text-muted-foreground">Confidence: {mockResult.confidence}%</p>
-                </div>
-                <div>
-                  <h4 className="font-medium mb-2">Recommendations:</h4>
-                  <ul className="list-disc list-inside space-y-1">
-                    {mockResult.recommendations.map((rec, index) => (
-                      <li key={index} className="text-sm text-muted-foreground">{rec}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
+        <DiseaseResult result={mockResult} />
+
+        {/* Additional Charts and Metrics */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+          <DiseaseDistributionChart />
+          <AccuracyTrendChart />
+          <AccuracyMetrics />
+        </div>
+
+        {/* Geographical Analysis and Detailed Table */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+          <GeographicalAnalysis />
+          <DetailedAnalysisTable />
+        </div>
       </div>
     </div>
   );
