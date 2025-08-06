@@ -1,54 +1,34 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const data = [
-  { category: "Vegetables", healthy: 245, diseased: 32, total: 277 },
-  { category: "Fruits", healthy: 189, diseased: 28, total: 217 },
-  { category: "Flowers", healthy: 156, diseased: 19, total: 175 },
-  { category: "Herbs", healthy: 134, diseased: 12, total: 146 },
-  { category: "Trees", healthy: 98, diseased: 15, total: 113 },
+  { name: 'Tomatoes', healthy: 80, diseased: 20 },
+  { name: 'Peppers', healthy: 85, diseased: 15 },
+  { name: 'Lettuce', healthy: 90, diseased: 10 },
+  { name: 'Cucumbers', healthy: 75, diseased: 25 },
 ];
 
-const chartConfig = {
-  healthy: {
-    label: "Healthy Plants",
-    color: "hsl(var(--primary))",
-  },
-  diseased: {
-    label: "Diseased Plants",
-    color: "hsl(var(--destructive))",
-  },
-};
-
-export default function PlantHealthOverview() {
+const PlantHealthOverview = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Plant Health by Category</CardTitle>
-        <CardDescription>Health status distribution across plant types</CardDescription>
+        <CardTitle>Plant Health Overview</CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={data}>
-              <XAxis dataKey="category" />
-              <YAxis />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Bar
-                dataKey="healthy"
-                fill="hsl(var(--primary))"
-                radius={[0, 0, 4, 4]}
-              />
-              <Bar
-                dataKey="diseased"
-                fill="hsl(var(--destructive))"
-                radius={[4, 4, 0, 0]}
-              />
-            </BarChart>
-          </ResponsiveContainer>
-        </ChartContainer>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="healthy" fill="#10B981" />
+            <Bar dataKey="diseased" fill="#EF4444" />
+          </BarChart>
+        </ResponsiveContainer>
       </CardContent>
     </Card>
   );
-}
+};
+
+export default PlantHealthOverview;

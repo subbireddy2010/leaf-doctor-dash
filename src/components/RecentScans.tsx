@@ -1,92 +1,47 @@
-import { Clock } from "lucide-react";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import healthyTomato from "@/assets/healthy-tomato-plant.jpg";
-import diseasedLeaf from "@/assets/diseased-leaf-spots.jpg";
-import powderyMildew from "@/assets/powdery-mildew-rose.jpg";
-import healthyLettuce from "@/assets/healthy-lettuce.jpg";
-import healthyCucumber from "@/assets/healthy-cucumber.jpg";
-import bacterialBlight from "@/assets/bacterial-blight.jpg";
+import { Clock } from "lucide-react";
 
-const mockScans = [
-  {
-    id: 1,
-    image: healthyTomato,
-    disease: "Healthy Plant",
-    confidence: 98,
-    severity: "low" as const,
-    timestamp: "2 hours ago"
-  },
-  {
-    id: 2,
-    image: diseasedLeaf, 
-    disease: "Leaf Spot",
-    confidence: 85,
-    severity: "medium" as const,
-    timestamp: "1 day ago"
-  },
-  {
-    id: 3,
-    image: powderyMildew,
-    disease: "Powdery Mildew",
-    confidence: 92,
-    severity: "high" as const,
-    timestamp: "2 days ago"
-  },
-  {
-    id: 4,
-    image: healthyLettuce,
-    disease: "Healthy Plant",
-    confidence: 96,
-    severity: "low" as const,
-    timestamp: "3 days ago"
-  },
-  {
-    id: 5,
-    image: bacterialBlight,
-    disease: "Bacterial Blight",
-    confidence: 89,
-    severity: "high" as const,
-    timestamp: "4 days ago"
-  }
+const recentScans = [
+  { id: 1, plant: "Tomato", result: "Healthy", time: "2 min ago", severity: "low" },
+  { id: 2, plant: "Rose", result: "Powdery Mildew", time: "15 min ago", severity: "medium" },
+  { id: 3, plant: "Lettuce", result: "Leaf Spot", time: "1 hour ago", severity: "high" },
+  { id: 4, plant: "Cucumber", result: "Healthy", time: "2 hours ago", severity: "low" },
 ];
 
 const RecentScans = () => {
   const severityColors = {
-    low: "success",
-    medium: "warning", 
-    high: "destructive"
-  } as const;
+    low: "bg-green-100 text-green-800",
+    medium: "bg-yellow-100 text-yellow-800",
+    high: "bg-red-100 text-red-800"
+  };
 
   return (
-    <Card className="w-full">
+    <Card>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Clock className="h-5 w-5" />
-          Recent Scans
-        </CardTitle>
+        <CardTitle>Recent Scans</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-        {mockScans.map((scan) => (
-          <div key={scan.id} className="flex items-center gap-4 p-3 rounded-lg hover:bg-accent/50 transition-colors">
-            <div className="w-12 h-12 rounded-lg overflow-hidden">
-              <img 
-                src={scan.image} 
-                alt={scan.disease}
-                className="w-full h-full object-cover"
-              />
+      <CardContent>
+        <div className="space-y-3">
+          {recentScans.map((scan) => (
+            <div key={scan.id} className="flex items-center justify-between p-3 border rounded-lg">
+              <div>
+                <p className="font-medium">{scan.plant}</p>
+                <p className="text-sm text-muted-foreground">{scan.result}</p>
+              </div>
+              <div className="text-right">
+                <Badge className={severityColors[scan.severity as keyof typeof severityColors]}>
+                  {scan.result}
+                </Badge>
+                <p className="text-xs text-muted-foreground mt-1 flex items-center">
+                  <Clock className="mr-1 h-3 w-3" />
+                  {scan.time}
+                </p>
+              </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="font-medium text-foreground truncate">{scan.disease}</p>
-              <p className="text-sm text-muted-foreground">{scan.timestamp}</p>
-            </div>
-            <div className="text-right">
-              <Badge variant={severityColors[scan.severity]} className="mb-1">
-                {scan.confidence}%
-              </Badge>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </CardContent>
     </Card>
   );

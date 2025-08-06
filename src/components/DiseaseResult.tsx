@@ -1,95 +1,67 @@
-import { CheckCircle, AlertTriangle, Info } from "lucide-react";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import diseasedLeaf from "@/assets/diseased-leaf-spots.jpg";
+import { AlertTriangle, CheckCircle, XCircle } from "lucide-react";
 
 interface DiseaseResultProps {
-  result?: {
+  result: {
     disease: string;
     confidence: number;
     severity: "low" | "medium" | "high";
     recommendations: string[];
-  };
+  } | null;
 }
 
 const DiseaseResult = ({ result }: DiseaseResultProps) => {
-  if (!result) {
-    return (
-      <Card className="w-full">
-        <CardContent className="p-12 text-center">
-          <Info className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-          <p className="text-lg text-muted-foreground">
-            Upload an image to see disease detection results
-          </p>
-        </CardContent>
-      </Card>
-    );
-  }
+  if (!result) return null;
 
   const severityColors = {
-    low: "success",
-    medium: "warning",
-    high: "destructive"
-  } as const;
-
-  const severityIcons = {
-    low: CheckCircle,
-    medium: AlertTriangle,
-    high: AlertTriangle
+    low: "bg-green-100 text-green-800",
+    medium: "bg-yellow-100 text-yellow-800", 
+    high: "bg-red-100 text-red-800"
   };
 
-  const SeverityIcon = severityIcons[result.severity];
+  const SeverityIcon = {
+    low: CheckCircle,
+    medium: AlertTriangle,
+    high: XCircle
+  };
+
+  const IconComponent = SeverityIcon[result.severity];
 
   return (
-    <Card className="w-full">
+    <Card>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <SeverityIcon className="h-5 w-5" />
-          Detection Results
-        </CardTitle>
+        <CardTitle>Analysis Result</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-6">
-        <div className="flex items-start gap-4">
-          <div className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
-            <img 
-              src={diseasedLeaf} 
-              alt={result.disease}
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="flex-1 flex items-center justify-between">
-            <div>
-              <h3 className="text-xl font-semibold text-foreground">{result.disease}</h3>
-              <p className="text-sm text-muted-foreground">
-                Confidence: {result.confidence}%
-              </p>
-            </div>
-            <Badge variant={severityColors[result.severity]} className="capitalize">
-              {result.severity} Risk
+      <CardContent>
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-semibold">{result.disease}</h3>
+            <Badge className={severityColors[result.severity]}>
+              <IconComponent className="mr-1 h-3 w-3" />
+              {result.severity.toUpperCase()}
             </Badge>
           </div>
-        </div>
+          
+          <div>
+            <p className="text-sm text-muted-foreground">Confidence: {result.confidence}%</p>
+            <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
+              <div 
+                className="bg-primary h-2 rounded-full" 
+                style={{ width: `${result.confidence}%` }}
+              ></div>
+            </div>
+          </div>
 
-        <div className="space-y-3">
-          <h4 className="font-medium text-foreground">Recommended Actions:</h4>
-          <ul className="space-y-2">
-            {result.recommendations.map((rec, index) => (
-              <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                {rec}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm">
-            Save Report
-          </Button>
-          <Button variant="ghost" size="sm">
-            Get More Info
-          </Button>
+          <div>
+            <h4 className="font-medium mb-2">Recommendations:</h4>
+            <ul className="list-disc list-inside space-y-1 text-sm">
+              {result.recommendations.map((rec, index) => (
+                <li key={index} className="text-muted-foreground">{rec}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </CardContent>
     </Card>
