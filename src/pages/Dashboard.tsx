@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Scan, TrendingUp, Activity, AlertTriangle, Shield, Target, Brain } from "lucide-react";
 import Header from "@/components/Header";
@@ -14,7 +15,6 @@ import RealTimeMonitoring from "@/components/Dashboard/RealTimeMonitoring";
 import AccuracyMetrics from "@/components/Dashboard/AccuracyMetrics";
 import GeographicalAnalysis from "@/components/Dashboard/GeographicalAnalysis";
 import DetailedAnalysisTable from "@/components/Dashboard/DetailedAnalysisTable";
-import heroBanner from "@/assets/hero-banner.jpg";
 
 const Dashboard = () => {
   const [analysisResult, setAnalysisResult] = useState<any>(null);
@@ -39,15 +39,12 @@ const Dashboard = () => {
       
       {/* Hero Section */}
       <div 
-        className="relative h-48 bg-cover bg-center"
-        style={{ 
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${heroBanner})`,
-          background: 'var(--gradient-hero)'
-        }}
+        className="relative h-48 bg-gradient-to-r from-blue-600 to-green-600"
+        style={{ background: 'var(--gradient-hero)' }}
       >
-        <div className="absolute inset-0" style={{ background: 'var(--gradient-hero)' }} />
+        <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 h-full flex items-center justify-center">
-          <div className="text-center text-foreground">
+          <div className="text-center text-white">
             <h2 className="text-3xl font-bold mb-2">Plant Health Detection</h2>
             <p className="text-lg opacity-80">AI-powered disease identification for healthier plants</p>
           </div>
