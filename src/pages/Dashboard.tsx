@@ -59,7 +59,6 @@ const Dashboard = () => {
               value="12,847"
               trend="+12% this month"
               trendColor="success"
-              href="/analytics/scans"
             />
             <StatsCard
               icon={Brain}
@@ -67,7 +66,6 @@ const Dashboard = () => {
               value="95.8%"
               trend="+2.1% this week"
               trendColor="success"
-              href="/analytics/accuracy"
             />
             <StatsCard
               icon={Activity}
@@ -75,7 +73,6 @@ const Dashboard = () => {
               value="11,892"
               trend="+5% this month"
               trendColor="success"
-              href="/plants/healthy"
             />
             <StatsCard
               icon={AlertTriangle}
@@ -83,7 +80,6 @@ const Dashboard = () => {
               value="35"
               trend="-8% this month"
               trendColor="success"
-              href="/alerts/active"
             />
             <StatsCard
               icon={Target}
@@ -91,7 +87,6 @@ const Dashboard = () => {
               value="97.1%"
               trend="+1.5% this week"
               trendColor="success"
-              href="/analytics/detection"
             />
             <StatsCard
               icon={Shield}
@@ -99,7 +94,6 @@ const Dashboard = () => {
               value="$127K"
               trend="+23% this month"
               trendColor="success"
-              href="/analytics/savings"
             />
             <StatsCard
               icon={TrendingUp}
@@ -107,7 +101,6 @@ const Dashboard = () => {
               value="99.9%"
               trend="Stable"
               trendColor="success"
-              href="/system/health"
             />
           </div>
         </div>
