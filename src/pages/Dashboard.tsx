@@ -35,14 +35,14 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ background: 'var(--gradient-dashboard)' }}>
       <Header />
       
       {/* Hero Section */}
-      <div className="relative h-48 bg-gradient-to-r from-primary to-green-600">
-        <div className="absolute inset-0 bg-black/30" />
+      <div className="relative h-48" style={{ background: 'var(--gradient-hero)' }}>
+        <div className="absolute inset-0 bg-black/10" />
         <div className="relative z-10 h-full flex items-center justify-center">
-          <div className="text-center text-white">
+          <div className="text-center text-foreground">
             <h2 className="text-3xl font-bold mb-2">Plant Health Detection</h2>
             <p className="text-lg opacity-80">AI-powered disease identification for healthier plants</p>
           </div>
@@ -51,7 +51,7 @@ const Dashboard = () => {
 
       <div className="container mx-auto px-6 py-8">
         {/* Enhanced Stats Overview */}
-        <div className="bg-card rounded-xl p-6 mb-8">
+        <div className="rounded-xl p-6 mb-8" style={{ background: 'var(--gradient-stats)' }}>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
             <StatsCard
               icon={Scan}
