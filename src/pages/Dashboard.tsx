@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Scan, TrendingUp, Activity, AlertTriangle, Shield, Target, Brain } from "lucide-react";
 import Header from "@/components/Header";
@@ -16,6 +15,7 @@ import RealTimeMonitoring from "@/components/Dashboard/RealTimeMonitoring";
 import AccuracyMetrics from "@/components/Dashboard/AccuracyMetrics";
 import GeographicalAnalysis from "@/components/Dashboard/GeographicalAnalysis";
 import DetailedAnalysisTable from "@/components/Dashboard/DetailedAnalysisTable";
+import SecurityMonitor from "@/components/SecurityMonitor";
 
 const Dashboard = () => {
   const [analysisResult, setAnalysisResult] = useState<any>(null);
@@ -117,6 +117,7 @@ const Dashboard = () => {
             <RecentScans />
             <AlertSystem />
             <RealTimeMonitoring />
+            <SecurityMonitor />
           </div>
         </div>
 
